@@ -182,6 +182,8 @@ JVMCIObjectArray CompilerToVM::initialize_intrinsics(JVMCI_TRAPS) {
   return vmIntrinsics;
 }
 
+//do_intx_flag(ObjectAlignmentInBytes)                                     \
+
 #define PREDEFINED_CONFIG_FLAGS(do_bool_flag, do_intx_flag, do_uintx_flag) \
   do_intx_flag(AllocateInstancePrefetchLines)                              \
   do_intx_flag(AllocatePrefetchDistance)                                   \
@@ -211,7 +213,6 @@ JVMCIObjectArray CompilerToVM::initialize_intrinsics(JVMCI_TRAPS) {
   do_bool_flag(JVMCIPrintProperties)                                       \
   do_bool_flag(JVMCIUseFastLocking)                                        \
   do_intx_flag(MethodProfileWidth)                                         \
-  do_intx_flag(ObjectAlignmentInBytes)                                     \
   do_bool_flag(PrintInlining)                                              \
   do_bool_flag(ReduceInitialCardMarks)                                     \
   do_bool_flag(RestrictContended)                                          \

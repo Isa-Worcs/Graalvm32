@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 -u
+#!/usr/bin/env -S python3 -u
 #
 # ----------------------------------------------------------------------------------------------------
 #
@@ -286,12 +286,15 @@ def main():
     version_numbers_file = join(jdk_src_dir, 'make', 'autoconf', 'version-numbers')
     java_version = get_java_version(version_numbers_file)
 
+    """
     tag_prefix = 'jdk-' + java_version + '+'
     tag_command = ['git', '-C', jdk_src_dir, 'tag']
     build_nums = [int(line[len(tag_prefix):]) for line in check_output(tag_command).split() if line.startswith(tag_prefix)]
     if len(build_nums) == 0:
         abort('No tags matching prefix "{}" in output of `{}`'.format(tag_prefix, ' '.join(tag_command)))
     build_num = sorted(build_nums, reverse=True)[0]
+    """
+    build_num = "1"
 
     debug_qualifier = '' if jdk_debug_level == 'release' else '-debug'
     debug_qualifier = '-slowdebug' if jdk_debug_level == 'slowdebug' else debug_qualifier
@@ -299,18 +302,20 @@ def main():
     install_prefix = 'labsjdk-ce-{}-jvmci-{}{}'.format(java_version, jvmci_version, debug_qualifier)
     jdk_bundle_name = jdk_bundle_prefix + '-{}-{}.tar.gz'.format(build_os, build_arch)
     jdk_bundle = join(target_dir, jdk_bundle_name)
-    conf_name = build_os + '-' + build_arch + debug_qualifier
+    #conf_name = build_os + '-' + build_arch + debug_qualifier
+    conf_name = "linux-x86"
 
     # zlib should only be bundled on Windows
     zlib_bundling = 'bundled' if build_os == 'windows' else 'system'
 
     configure_options = [
+        "--with-target-bits=32",
         "--with-debug-level=" + jdk_debug_level,
         "--with-extra-asflags=", # To prevent a compilation fail when building with libmusl
         "--enable-aot=no", # HotSpot AOT is omitted from labsjdk
         "--with-jvm-features=-graal", # Do not build Graal since it is effectively dead in OpenJDK (JDK-8263327)
         "--with-jvm-variants=server",
-        "--with-conf-name=" + conf_name,
+        "--with-conf-name=linux-x86",
         "--with-boot-jdk=" + opts.boot_jdk,
         "--with-devkit=" + opts.devkit,
         "--with-zlib=" + zlib_bundling,

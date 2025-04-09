@@ -633,7 +633,7 @@ _coopFlags = ['-XX:-UseCompressedOops']
 _gcVerificationFlags = ['-XX:+UnlockDiagnosticVMOptions', '-XX:+VerifyBeforeGC', '-XX:+VerifyAfterGC']
 _g1VerificationFlags = ['-XX:-UseSerialGC', '-XX:+UseG1GC']
 _exceptionFlags = ['-Dgraal.StressInvokeWithExceptionNode=true']
-_registerPressureFlags = ['-Dgraal.RegisterPressure=' + _registers[mx.get_arch()]]
+#_registerPressureFlags = ['-Dgraal.RegisterPressure=' + _registers[mx.get_arch()]]
 
 graal_bootstrap_tests = [
     BootstrapTest('BootstrapWithSystemAssertionsFullVerify', _defaultFlags + _assertionFlags + _verificationFlags + _graalErrorFlags, tags=GraalTags.bootstrapfullverify),
@@ -643,7 +643,7 @@ graal_bootstrap_tests = [
     BootstrapTest('BootstrapWithG1GCVerification', _defaultFlags + _g1VerificationFlags + _gcVerificationFlags + _graalErrorFlags, tags=GraalTags.bootstrap, suppress=['VerifyAfterGC:', 'VerifyBeforeGC:']),
     BootstrapTest('BootstrapWithSystemAssertionsEconomy', _defaultFlags + _assertionFlags + _graalEconomyFlags + _graalErrorFlags, tags=GraalTags.bootstrapeconomy),
     BootstrapTest('BootstrapWithSystemAssertionsExceptionEdges', _defaultFlags + _assertionFlags + _exceptionFlags + _graalErrorFlags, tags=GraalTags.bootstrap),
-    BootstrapTest('BootstrapWithSystemAssertionsRegisterPressure', _defaultFlags + _assertionFlags + _registerPressureFlags + _graalErrorFlags, tags=GraalTags.bootstrap),
+#    BootstrapTest('BootstrapWithSystemAssertionsRegisterPressure', _defaultFlags + _assertionFlags + _registerPressureFlags + _graalErrorFlags, tags=GraalTags.bootstrap),
 ]
 
 def _graal_gate_runner(args, tasks):

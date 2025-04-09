@@ -150,6 +150,10 @@ suite = {
       "packedResource" : True,
       "os_arch" : {
         "linux" : {
+          "x86" : {
+            "sha1" : "124fdfe42933ec6f529af5df4062d83e9d0570dc",
+            "urls" : ["{urlbase}/intel/hsdis-amd64-linux-0d031013db9a80d6c88330c42c983fbfa7053193.tar.gz"],
+          },
           "amd64" : {
             "sha1" : "124fdfe42933ec6f529af5df4062d83e9d0570dc",
             "urls" : ["{urlbase}/intel/hsdis-amd64-linux-0d031013db9a80d6c88330c42c983fbfa7053193.tar.gz"],

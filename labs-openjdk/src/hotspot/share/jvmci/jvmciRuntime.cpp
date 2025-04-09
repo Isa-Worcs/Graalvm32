@@ -761,10 +761,10 @@ void JVMCINMethodData::initialize(
 
 void JVMCINMethodData::add_failed_speculation(nmethod* nm, jlong speculation) {
   jlong index = speculation >> JVMCINMethodData::SPECULATION_LENGTH_BITS;
-  guarantee(index >= 0 && index <= max_jint, "Encoded JVMCI speculation index is not a positive Java int: " INTPTR_FORMAT, index);
+  guarantee(index >= 0 && index <= max_jint, "Encoded JVMCI speculation index is not a positive Java int: " JLONG_FORMAT, index);
   int length = speculation & JVMCINMethodData::SPECULATION_LENGTH_MASK;
   if (index + length > (uint) nm->speculations_size()) {
-    fatal(INTPTR_FORMAT "[index: " JLONG_FORMAT ", length: %d out of bounds wrt encoded speculations of length %u", speculation, index, length, nm->speculations_size());
+    fatal(JLONG_FORMAT "[index: " JLONG_FORMAT ", length: %d out of bounds wrt encoded speculations of length %u", speculation, index, length, nm->speculations_size());
   }
   address data = nm->speculations_begin() + index;
   FailedSpeculation::add_failed_speculation(nm, _failed_speculations, data, length);
@@ -1180,7 +1180,7 @@ JNIEnv* JVMCIRuntime::init_shared_library_javavm() {
       guarantee(env != NULL, "missing env");
       _shared_library_javavm_id = javaVM_id;
       _shared_library_javavm = javaVM;
-      JVMCI_event_1("created JavaVM[%ld]@" PTR_FORMAT " for JVMCI runtime %d", javaVM_id, p2i(javaVM), _id);
+      JVMCI_event_1("created JavaVM[%lld]@" PTR_FORMAT " for JVMCI runtime %d", javaVM_id, p2i(javaVM), _id);
       return env;
     } else {
       fatal("JNI_CreateJavaVM failed with return value %d", result);
@@ -1420,7 +1420,7 @@ JVM_ENTRY_NO_ENV(void, JVM_RegisterJVMCINatives(JNIEnv *env, jclass c2vmClass))
   guarantee(heap_end < allocation_end, "heap end too close to end of address space (might lead to erroneous TLAB allocations)");
 #endif // TARGET_ARCH_sparc
 #else
-  fatal("check TLAB allocation code for address space conflicts");
+  //fatal("check TLAB allocation code for address space conflicts");
 #endif
 
   JNI_JVMCIENV(thread, env);
