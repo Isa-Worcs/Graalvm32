@@ -182,7 +182,9 @@ JVMCIObjectArray CompilerToVM::initialize_intrinsics(JVMCI_TRAPS) {
   return vmIntrinsics;
 }
 
-//do_intx_flag(ObjectAlignmentInBytes)                                     \
+//  do_intx_flag(ObjectAlignmentInBytes)                                     \
+//  do_bool_flag(UseCompressedClassPointers)                                 \
+//  do_bool_flag(UseCompressedOops)                                          \
 
 #define PREDEFINED_CONFIG_FLAGS(do_bool_flag, do_intx_flag, do_uintx_flag) \
   do_intx_flag(AllocateInstancePrefetchLines)                              \
@@ -225,8 +227,6 @@ JVMCIObjectArray CompilerToVM::initialize_intrinsics(JVMCI_TRAPS) {
   X86_ONLY(do_intx_flag(UseAVX))                                           \
   do_bool_flag(UseBiasedLocking)                                           \
   do_bool_flag(UseCRC32Intrinsics)                                         \
-  do_bool_flag(UseCompressedClassPointers)                                 \
-  do_bool_flag(UseCompressedOops)                                          \
   X86_ONLY(do_bool_flag(UseCountLeadingZerosInstruction))                  \
   X86_ONLY(do_bool_flag(UseCountTrailingZerosInstruction))                 \
   do_bool_flag(UseConcMarkSweepGC)                                         \
