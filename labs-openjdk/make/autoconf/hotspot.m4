@@ -424,6 +424,7 @@ AC_DEFUN_ONCE([HOTSPOT_SETUP_JVM_FEATURES],
     # Only enable jvmci on x86_64 and aarch64 and xsparcv9
     if test "x$OPENJDK_TARGET_CPU" = "xx86_64" || \
        test "x$OPENJDK_TARGET_CPU" = "xsparcv9" || \
+       test "x86" = "x86" || \
        test "x$OPENJDK_TARGET_CPU" = "xaarch64" ; then
       AC_MSG_RESULT([yes])
       JVM_FEATURES_jvmci="jvmci"
