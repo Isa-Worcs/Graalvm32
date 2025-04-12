@@ -329,7 +329,10 @@ public final class HotSpotConstantPool implements ConstantPool, MetaspaceHandleO
      */
     long getEntryAt(int index) {
         assert checkBounds(index);
-        int offset = index * runtime().getHostJVMCIBackend().getTarget().wordSize;
+        int ws = runtime().getHostJVMCIBackend().getTarget().wordSize;
+        //int offset = index * runtime().getHostJVMCIBackend().getTarget().wordSize;
+        int offset = index * 4;
+	System.out.println("wordSize=" + ws + "offset=" + offset);
         return UNSAFE.getAddress(getConstantPoolPointer() + config().constantPoolSize + offset);
     }
 
