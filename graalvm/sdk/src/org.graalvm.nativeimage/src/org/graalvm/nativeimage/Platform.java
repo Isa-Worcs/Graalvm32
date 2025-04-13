@@ -129,6 +129,18 @@ public interface Platform {
         }
     }
 
+    interface i386 extends Platform {
+
+        /**
+         * Returns string representing i386 architecture.
+         *
+         * @since 21.0
+         */
+        default String getArchitecture() {
+            return "i386";
+        }
+    }
+
     /**
      * Supported architecture: ARMv8 64-bit.
      *
@@ -250,6 +262,9 @@ public interface Platform {
     interface LINUX_AMD64_BASE extends LINUX, AMD64 {
     }
 
+    interface LINUX_i386_BASE extends LINUX, i386 {
+    }
+
     /**
      * Basis for all Linux operating systems on AARCH64 (LINUX_AARCH64 & ANDROID_AARCH64).
      *
@@ -290,6 +305,18 @@ public interface Platform {
          * @since 19.0
          */
         public LINUX_AMD64() {
+        }
+
+    }
+
+    class LINUX_i386 implements LINUX, LINUX_i386_BASE {
+
+        /**
+         * Instantiates a marker instance of this platform.
+         *
+         * @since 19.0
+         */
+        public LINUX_i386() {
         }
 
     }
