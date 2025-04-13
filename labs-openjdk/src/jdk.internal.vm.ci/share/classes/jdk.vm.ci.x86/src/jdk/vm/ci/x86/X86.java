@@ -224,7 +224,7 @@ public class X86 extends Architecture {
     private final X86Kind largestKind;
 
     public X86(EnumSet<CPUFeature> features, EnumSet<Flag> flags) {
-        super("X86", X86Kind.QWORD, ByteOrder.LITTLE_ENDIAN, true, allRegisters, LOAD_LOAD | LOAD_STORE | STORE_STORE, 1, 8);
+        super("X86", X86Kind.DWORD, ByteOrder.LITTLE_ENDIAN, true, allRegisters, LOAD_LOAD | LOAD_STORE | STORE_STORE, 1, 8);
         this.features = features;
         this.flags = flags;
         assert features.contains(CPUFeature.SSE2) : "minimum config for x86";
