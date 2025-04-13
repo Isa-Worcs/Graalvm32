@@ -1,3 +1,0 @@
-#!/bin/sh
-
-./build_labsjdk.py --jvmci-version 22.3-b18 --jdk-debug-level fastdebug

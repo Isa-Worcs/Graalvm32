@@ -108,10 +108,6 @@ suite = {
       "packedResource": True,
       "os_arch" : {
         "linux" : {
-          "x86" : {
-            "sha1": "bbec782ba0864d71fe49ffbba85fbb1b1f8fb734",
-            "urls": ["https://lafo.ssw.uni-linz.ac.at/pub/graal-external-deps/upx/upx-3.96-amd64_linux.tar.gz"],
-          },
           "amd64" : {
             "sha1": "bbec782ba0864d71fe49ffbba85fbb1b1f8fb734",
             "urls": ["https://lafo.ssw.uni-linz.ac.at/pub/graal-external-deps/upx/upx-3.96-amd64_linux.tar.gz"],
@@ -187,10 +183,6 @@ suite = {
       "host" : "https://lafo.ssw.uni-linz.ac.at/pub/llvm-org",
       "os_arch" : {
         "linux" : {
-          "x86" : {
-            "urls" : ["{host}/llvm-llvmorg-{version}-linux-amd64.tar.gz"],
-            "sha1" : "4cd45eff8e914189dd8bebcfaf46271c412c57fa",
-          },
           "amd64" : {
             "urls" : ["{host}/llvm-llvmorg-{version}-linux-amd64.tar.gz"],
             "sha1" : "4cd45eff8e914189dd8bebcfaf46271c412c57fa",

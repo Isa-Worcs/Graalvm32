@@ -129,18 +129,6 @@ public interface Platform {
         }
     }
 
-    interface X86 extends Platform {
-
-        /**
-         * Returns string representing X86 architecture.
-         *
-         * @since 21.0
-         */
-        default String getArchitecture() {
-            return "x86";
-        }
-    }
-
     /**
      * Supported architecture: ARMv8 64-bit.
      *
@@ -262,9 +250,6 @@ public interface Platform {
     interface LINUX_AMD64_BASE extends LINUX, AMD64 {
     }
 
-    interface LINUX_X86_BASE extends LINUX, X86 {
-    }
-
     /**
      * Basis for all Linux operating systems on AARCH64 (LINUX_AARCH64 & ANDROID_AARCH64).
      *
@@ -305,18 +290,6 @@ public interface Platform {
          * @since 19.0
          */
         public LINUX_AMD64() {
-        }
-
-    }
-
-    class LINUX_X86 implements LINUX, LINUX_X86_BASE {
-
-        /**
-         * Instantiates a marker instance of this platform.
-         *
-         * @since 19.0
-         */
-        public LINUX_X86() {
         }
 
     }
