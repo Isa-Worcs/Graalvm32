@@ -303,7 +303,7 @@ def main():
     jdk_bundle_name = jdk_bundle_prefix + '-{}-{}.tar.gz'.format(build_os, build_arch)
     jdk_bundle = join(target_dir, jdk_bundle_name)
     #conf_name = build_os + '-' + build_arch + debug_qualifier
-    conf_name = "linux-x86"
+    conf_name = "linux-i386-debug"
 
     # zlib should only be bundled on Windows
     zlib_bundling = 'bundled' if build_os == 'windows' else 'system'
@@ -315,7 +315,7 @@ def main():
         "--enable-aot=no", # HotSpot AOT is omitted from labsjdk
         "--with-jvm-features=-graal", # Do not build Graal since it is effectively dead in OpenJDK (JDK-8263327)
         "--with-jvm-variants=server",
-        "--with-conf-name=linux-x86",
+        "--with-conf-name=linux-i386-debug",
         "--with-boot-jdk=" + opts.boot_jdk,
         "--with-devkit=" + opts.devkit,
         "--with-zlib=" + zlib_bundling,

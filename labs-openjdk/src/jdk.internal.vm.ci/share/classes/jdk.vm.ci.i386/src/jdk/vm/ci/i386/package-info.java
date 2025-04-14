@@ -22,6 +22,6 @@
  */
 
 /**
- * The X86 platform independent portions of the JVMCI API.
+ * The i386 platform independent portions of the JVMCI API.
  */
-package jdk.vm.ci.x86;
+package jdk.vm.ci.i386;

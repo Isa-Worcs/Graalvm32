@@ -22,6 +22,6 @@
  */
 
 /**
- * The X86 HotSpot specific portions of the JVMCI API.
+ * The I386 HotSpot specific portions of the JVMCI API.
  */
-package jdk.vm.ci.hotspot.x86;
+package jdk.vm.ci.hotspot.i386;

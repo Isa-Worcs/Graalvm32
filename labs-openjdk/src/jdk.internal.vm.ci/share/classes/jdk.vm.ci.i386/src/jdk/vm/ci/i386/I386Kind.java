@@ -20,11 +20,11 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package jdk.vm.ci.x86;
+package jdk.vm.ci.i386;
 
 import jdk.vm.ci.meta.PlatformKind;
 
-public enum X86Kind implements PlatformKind {
+public enum I386Kind implements PlatformKind {
 
     // scalar
     BYTE(1),
@@ -71,16 +71,16 @@ public enum X86Kind implements PlatformKind {
     private final int size;
     private final int vectorLength;
 
-    private final X86Kind scalar;
-    private final EnumKey<X86Kind> key = new EnumKey<>(this);
+    private final I386Kind scalar;
+    private final EnumKey<I386Kind> key = new EnumKey<>(this);
 
-    X86Kind(int size) {
+    I386Kind(int size) {
         this.size = size;
         this.scalar = this;
         this.vectorLength = 1;
     }
 
-    X86Kind(int size, X86Kind scalar) {
+    I386Kind(int size, I386Kind scalar) {
         this.size = size;
         this.scalar = scalar;
 
@@ -88,7 +88,7 @@ public enum X86Kind implements PlatformKind {
         this.vectorLength = size / scalar.size;
     }
 
-    public X86Kind getScalar() {
+    public I386Kind getScalar() {
         return scalar;
     }
 

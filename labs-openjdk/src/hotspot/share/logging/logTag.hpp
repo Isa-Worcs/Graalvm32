@@ -101,6 +101,7 @@
   LOG_TAG(methodcomparator) \
   LOG_TAG(metadata) \
   LOG_TAG(metaspace) \
+  LOG_TAG(mine) \
   LOG_TAG(mmu) \
   LOG_TAG(module) \
   LOG_TAG(monitorinflation) \

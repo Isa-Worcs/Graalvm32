@@ -1146,6 +1146,8 @@ C2V_VMENTRY_0(jboolean, hasCompiledCodeForOSR, (JNIEnv* env, jobject, ARGUMENT_P
 C2V_END
 
 C2V_VMENTRY_NULL(jobject, getSymbol, (JNIEnv* env, jobject, jlong symbol))
+  log_warning(mine)("the symbol: 0x%llx at %s %d" ,
+		  symbol, __FILE__, __LINE__);
   JVMCIObject sym = JVMCIENV->create_string((Symbol*)(address)symbol, JVMCI_CHECK_NULL);
   return JVMCIENV->get_jobject(sym);
 C2V_END

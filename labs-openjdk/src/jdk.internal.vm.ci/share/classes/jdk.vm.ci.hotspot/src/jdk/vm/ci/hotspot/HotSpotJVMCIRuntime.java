@@ -467,9 +467,6 @@ public final class HotSpotJVMCIRuntime implements JVMCIRuntime {
             if (factory.getArchitecture().equalsIgnoreCase(architecture)) {
                 return factory;
             }
-            if (factory.getArchitecture().equalsIgnoreCase("x86")) {
-                return factory;
-	    }
         }
 
         throw new JVMCIError("No JVMCI runtime available for the %s architecture", architecture);

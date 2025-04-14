@@ -20,13 +20,13 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package jdk.vm.ci.hotspot.x86;
+package jdk.vm.ci.hotspot.i386;
 
 import static jdk.vm.ci.common.InitTimer.timer;
 
 import java.util.EnumSet;
 
-import jdk.vm.ci.x86.X86;
+import jdk.vm.ci.i386.I386;
 import jdk.vm.ci.code.Architecture;
 import jdk.vm.ci.code.RegisterConfig;
 import jdk.vm.ci.code.TargetDescription;
@@ -41,114 +41,114 @@ import jdk.vm.ci.hotspot.HotSpotStackIntrospection;
 import jdk.vm.ci.meta.ConstantReflectionProvider;
 import jdk.vm.ci.runtime.JVMCIBackend;
 
-public class X86HotSpotJVMCIBackendFactory implements HotSpotJVMCIBackendFactory {
+public class I386HotSpotJVMCIBackendFactory implements HotSpotJVMCIBackendFactory {
 
-    private static EnumSet<X86.CPUFeature> computeFeatures(X86HotSpotVMConfig config) {
+    private static EnumSet<I386.CPUFeature> computeFeatures(I386HotSpotVMConfig config) {
         // Configure the feature set using the HotSpot flag settings.
-        EnumSet<X86.CPUFeature> features = EnumSet.noneOf(X86.CPUFeature.class);
+        EnumSet<I386.CPUFeature> features = EnumSet.noneOf(I386.CPUFeature.class);
         if ((config.vmVersionFeatures & config.amd643DNOWPREFETCH) != 0) {
-            features.add(X86.CPUFeature.AMD_3DNOW_PREFETCH);
+            features.add(I386.CPUFeature.AMD_3DNOW_PREFETCH);
         }
         assert config.useSSE >= 2 : "minimum config for x64";
-        features.add(X86.CPUFeature.SSE);
-        features.add(X86.CPUFeature.SSE2);
+        features.add(I386.CPUFeature.SSE);
+        features.add(I386.CPUFeature.SSE2);
         if ((config.vmVersionFeatures & config.amd64SSE3) != 0) {
-            features.add(X86.CPUFeature.SSE3);
+            features.add(I386.CPUFeature.SSE3);
         }
         if ((config.vmVersionFeatures & config.amd64SSSE3) != 0) {
-            features.add(X86.CPUFeature.SSSE3);
+            features.add(I386.CPUFeature.SSSE3);
         }
         if ((config.vmVersionFeatures & config.amd64SSE4A) != 0) {
-            features.add(X86.CPUFeature.SSE4A);
+            features.add(I386.CPUFeature.SSE4A);
         }
         if ((config.vmVersionFeatures & config.amd64SSE41) != 0) {
-            features.add(X86.CPUFeature.SSE4_1);
+            features.add(I386.CPUFeature.SSE4_1);
         }
         if ((config.vmVersionFeatures & config.amd64SSE42) != 0) {
-            features.add(X86.CPUFeature.SSE4_2);
+            features.add(I386.CPUFeature.SSE4_2);
         }
         if ((config.vmVersionFeatures & config.amd64POPCNT) != 0) {
-            features.add(X86.CPUFeature.POPCNT);
+            features.add(I386.CPUFeature.POPCNT);
         }
         if ((config.vmVersionFeatures & config.amd64LZCNT) != 0) {
-            features.add(X86.CPUFeature.LZCNT);
+            features.add(I386.CPUFeature.LZCNT);
         }
         if ((config.vmVersionFeatures & config.amd64ERMS) != 0) {
-            features.add(X86.CPUFeature.ERMS);
+            features.add(I386.CPUFeature.ERMS);
         }
         if ((config.vmVersionFeatures & config.amd64AVX) != 0) {
-            features.add(X86.CPUFeature.AVX);
+            features.add(I386.CPUFeature.AVX);
         }
         if ((config.vmVersionFeatures & config.amd64AVX2) != 0) {
-            features.add(X86.CPUFeature.AVX2);
+            features.add(I386.CPUFeature.AVX2);
         }
         if ((config.vmVersionFeatures & config.amd64AES) != 0) {
-            features.add(X86.CPUFeature.AES);
+            features.add(I386.CPUFeature.AES);
         }
         if ((config.vmVersionFeatures & config.amd643DNOWPREFETCH) != 0) {
-            features.add(X86.CPUFeature.AMD_3DNOW_PREFETCH);
+            features.add(I386.CPUFeature.AMD_3DNOW_PREFETCH);
         }
         if ((config.vmVersionFeatures & config.amd64BMI1) != 0) {
-            features.add(X86.CPUFeature.BMI1);
+            features.add(I386.CPUFeature.BMI1);
         }
         if ((config.vmVersionFeatures & config.amd64BMI2) != 0) {
-            features.add(X86.CPUFeature.BMI2);
+            features.add(I386.CPUFeature.BMI2);
         }
         if ((config.vmVersionFeatures & config.amd64RTM) != 0) {
-            features.add(X86.CPUFeature.RTM);
+            features.add(I386.CPUFeature.RTM);
         }
         if ((config.vmVersionFeatures & config.amd64ADX) != 0) {
-            features.add(X86.CPUFeature.ADX);
+            features.add(I386.CPUFeature.ADX);
         }
         if ((config.vmVersionFeatures & config.amd64AVX512F) != 0) {
-            features.add(X86.CPUFeature.AVX512F);
+            features.add(I386.CPUFeature.AVX512F);
         }
         if ((config.vmVersionFeatures & config.amd64AVX512DQ) != 0) {
-            features.add(X86.CPUFeature.AVX512DQ);
+            features.add(I386.CPUFeature.AVX512DQ);
         }
         if ((config.vmVersionFeatures & config.amd64AVX512PF) != 0) {
-            features.add(X86.CPUFeature.AVX512PF);
+            features.add(I386.CPUFeature.AVX512PF);
         }
         if ((config.vmVersionFeatures & config.amd64AVX512ER) != 0) {
-            features.add(X86.CPUFeature.AVX512ER);
+            features.add(I386.CPUFeature.AVX512ER);
         }
         if ((config.vmVersionFeatures & config.amd64AVX512CD) != 0) {
-            features.add(X86.CPUFeature.AVX512CD);
+            features.add(I386.CPUFeature.AVX512CD);
         }
         if ((config.vmVersionFeatures & config.amd64AVX512BW) != 0) {
-            features.add(X86.CPUFeature.AVX512BW);
+            features.add(I386.CPUFeature.AVX512BW);
         }
         if ((config.vmVersionFeatures & config.amd64AVX512VL) != 0) {
-            features.add(X86.CPUFeature.AVX512VL);
+            features.add(I386.CPUFeature.AVX512VL);
         }
         if ((config.vmVersionFeatures & config.amd64SHA) != 0) {
-            features.add(X86.CPUFeature.SHA);
+            features.add(I386.CPUFeature.SHA);
         }
         if ((config.vmVersionFeatures & config.amd64FMA) != 0) {
-            features.add(X86.CPUFeature.FMA);
+            features.add(I386.CPUFeature.FMA);
         }
         if ((config.vmVersionFeatures & config.amd64CLMUL) != 0) {
-            features.add(X86.CPUFeature.CLMUL);
+            features.add(I386.CPUFeature.CLMUL);
         }
         return features;
     }
 
-    private static EnumSet<X86.Flag> computeFlags(X86HotSpotVMConfig config) {
-        EnumSet<X86.Flag> flags = EnumSet.noneOf(X86.Flag.class);
+    private static EnumSet<I386.Flag> computeFlags(I386HotSpotVMConfig config) {
+        EnumSet<I386.Flag> flags = EnumSet.noneOf(I386.Flag.class);
         if (config.useCountLeadingZerosInstruction) {
-            flags.add(X86.Flag.UseCountLeadingZerosInstruction);
+            flags.add(I386.Flag.UseCountLeadingZerosInstruction);
         }
         if (config.useCountTrailingZerosInstruction) {
-            flags.add(X86.Flag.UseCountTrailingZerosInstruction);
+            flags.add(I386.Flag.UseCountTrailingZerosInstruction);
         }
         return flags;
     }
 
-    private static TargetDescription createTarget(X86HotSpotVMConfig config) {
+    private static TargetDescription createTarget(I386HotSpotVMConfig config) {
         final int stackFrameAlignment = 16;
         final int implicitNullCheckLimit = 4096;
         final boolean inlineObjects = true;
-        Architecture arch = new X86(computeFeatures(config), computeFlags(config));
+        Architecture arch = new I386(computeFeatures(config), computeFlags(config));
         return new TargetDescription(arch, true, stackFrameAlignment, implicitNullCheckLimit, inlineObjects);
     }
 
@@ -156,8 +156,8 @@ public class X86HotSpotJVMCIBackendFactory implements HotSpotJVMCIBackendFactory
         return new HotSpotConstantReflectionProvider(runtime);
     }
 
-    private static RegisterConfig createRegisterConfig(X86HotSpotVMConfig config, TargetDescription target) {
-        return new X86HotSpotRegisterConfig(target, false, config.windowsOs);
+    private static RegisterConfig createRegisterConfig(I386HotSpotVMConfig config, TargetDescription target) {
+        return new I386HotSpotRegisterConfig(target, false, config.windowsOs);
     }
 
     protected HotSpotCodeCacheProvider createCodeCache(HotSpotJVMCIRuntime runtime, TargetDescription target, RegisterConfig regConfig) {
@@ -170,7 +170,7 @@ public class X86HotSpotJVMCIBackendFactory implements HotSpotJVMCIBackendFactory
 
     @Override
     public String getArchitecture() {
-        return "X86";
+        return "I386";
     }
 
     @Override
@@ -182,7 +182,7 @@ public class X86HotSpotJVMCIBackendFactory implements HotSpotJVMCIBackendFactory
     @SuppressWarnings("try")
     public JVMCIBackend createJVMCIBackend(HotSpotJVMCIRuntime runtime, JVMCIBackend host) {
         assert host == null;
-        X86HotSpotVMConfig config = new X86HotSpotVMConfig(runtime.getConfigStore());
+        I386HotSpotVMConfig config = new I386HotSpotVMConfig(runtime.getConfigStore());
         TargetDescription target = createTarget(config);
 
         RegisterConfig regConfig;

@@ -20,7 +20,7 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package jdk.vm.ci.hotspot.x86;
+package jdk.vm.ci.hotspot.i386;
 
 import static jdk.vm.ci.amd64.AMD64.r12;
 import static jdk.vm.ci.amd64.AMD64.r15;
@@ -65,7 +65,7 @@ import jdk.vm.ci.meta.PlatformKind;
 import jdk.vm.ci.meta.Value;
 import jdk.vm.ci.meta.ValueKind;
 
-public class X86HotSpotRegisterConfig implements RegisterConfig {
+public class I386HotSpotRegisterConfig implements RegisterConfig {
 
     private final TargetDescription target;
 
@@ -140,12 +140,12 @@ public class X86HotSpotRegisterConfig implements RegisterConfig {
         return new RegisterArray(registers);
     }
 
-    public X86HotSpotRegisterConfig(TargetDescription target, boolean useCompressedOops, boolean windowsOs) {
+    public I386HotSpotRegisterConfig(TargetDescription target, boolean useCompressedOops, boolean windowsOs) {
         this(target, initAllocatable(target.arch, useCompressedOops), windowsOs);
         assert callerSaved.size() >= allocatable.size();
     }
 
-    public X86HotSpotRegisterConfig(TargetDescription target, RegisterArray allocatable, boolean windowsOS) {
+    public I386HotSpotRegisterConfig(TargetDescription target, RegisterArray allocatable, boolean windowsOS) {
         this.target = target;
         this.windowsOS = windowsOS;
 

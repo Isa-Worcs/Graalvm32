@@ -20,18 +20,18 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package jdk.vm.ci.hotspot.x86;
+package jdk.vm.ci.hotspot.i386;
 
 import jdk.vm.ci.hotspot.HotSpotVMConfigAccess;
 import jdk.vm.ci.hotspot.HotSpotVMConfigStore;
 import jdk.vm.ci.services.Services;
 
 /**
- * Used to access X86 specific native configuration details.
+ * Used to access I386 specific native configuration details.
  */
-class X86HotSpotVMConfig extends HotSpotVMConfigAccess {
+class I386HotSpotVMConfig extends HotSpotVMConfigAccess {
 
-    X86HotSpotVMConfig(HotSpotVMConfigStore config) {
+    I386HotSpotVMConfig(HotSpotVMConfigStore config) {
         super(config);
     }
 

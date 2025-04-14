@@ -20,7 +20,7 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package jdk.vm.ci.x86;
+package jdk.vm.ci.i386;
 
 import static jdk.vm.ci.code.MemoryBarriers.LOAD_LOAD;
 import static jdk.vm.ci.code.MemoryBarriers.LOAD_STORE;
@@ -38,9 +38,9 @@ import jdk.vm.ci.meta.JavaKind;
 import jdk.vm.ci.meta.PlatformKind;
 
 /**
- * Represents the X86 architecture.
+ * Represents the I386 architecture.
  */
-public class X86 extends Architecture {
+public class I386 extends Architecture {
 
     public static final RegisterCategory CPU = new RegisterCategory("CPU");
 
@@ -221,20 +221,20 @@ public class X86 extends Architecture {
 
     private final EnumSet<Flag> flags;
 
-    private final X86Kind largestKind;
+    private final I386Kind largestKind;
 
-    public X86(EnumSet<CPUFeature> features, EnumSet<Flag> flags) {
-        super("X86", X86Kind.DWORD, ByteOrder.LITTLE_ENDIAN, true, allRegisters, LOAD_LOAD | LOAD_STORE | STORE_STORE, 1, 8);
+    public I386(EnumSet<CPUFeature> features, EnumSet<Flag> flags) {
+        super("I386", I386Kind.DWORD, ByteOrder.LITTLE_ENDIAN, true, allRegisters, LOAD_LOAD | LOAD_STORE | STORE_STORE, 1, 8);
         this.features = features;
         this.flags = flags;
-        assert features.contains(CPUFeature.SSE2) : "minimum config for x86";
+        assert features.contains(CPUFeature.SSE2) : "minimum config for i386";
 
         if (features.contains(CPUFeature.AVX512F)) {
-            largestKind = X86Kind.V512_QWORD;
+            largestKind = I386Kind.V512_QWORD;
         } else if (features.contains(CPUFeature.AVX)) {
-            largestKind = X86Kind.V256_QWORD;
+            largestKind = I386Kind.V256_QWORD;
         } else {
-            largestKind = X86Kind.V128_QWORD;
+            largestKind = I386Kind.V128_QWORD;
         }
     }
 
@@ -260,19 +260,19 @@ public class X86 extends Architecture {
         switch (javaKind) {
             case Boolean:
             case Byte:
-                return X86Kind.BYTE;
+                return I386Kind.BYTE;
             case Short:
             case Char:
-                return X86Kind.WORD;
+                return I386Kind.WORD;
             case Int:
-                return X86Kind.DWORD;
+                return I386Kind.DWORD;
             case Long:
             case Object:
-                return X86Kind.QWORD;
+                return I386Kind.QWORD;
             case Float:
-                return X86Kind.SINGLE;
+                return I386Kind.SINGLE;
             case Double:
-                return X86Kind.DOUBLE;
+                return I386Kind.DOUBLE;
             default:
                 return null;
         }
@@ -280,7 +280,7 @@ public class X86 extends Architecture {
 
     @Override
     public boolean canStoreValue(RegisterCategory category, PlatformKind platformKind) {
-        X86Kind kind = (X86Kind) platformKind;
+        I386Kind kind = (I386Kind) platformKind;
         if (kind.isInteger()) {
             return category.equals(CPU);
         } else if (kind.isXMM()) {
@@ -292,13 +292,13 @@ public class X86 extends Architecture {
     }
 
     @Override
-    public X86Kind getLargestStorableKind(RegisterCategory category) {
+    public I386Kind getLargestStorableKind(RegisterCategory category) {
         if (category.equals(CPU)) {
-            return X86Kind.QWORD;
+            return I386Kind.QWORD;
         } else if (category.equals(XMM)) {
             return largestKind;
         } else if (category.equals(MASK)) {
-            return X86Kind.MASK64;
+            return I386Kind.MASK64;
         } else {
             return null;
         }
