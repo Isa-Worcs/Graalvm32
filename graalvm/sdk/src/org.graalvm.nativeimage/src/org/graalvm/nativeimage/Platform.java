@@ -129,7 +129,7 @@ public interface Platform {
         }
     }
 
-    interface i386 extends Platform {
+    interface I386 extends Platform {
 
         /**
          * Returns string representing i386 architecture.
@@ -262,7 +262,7 @@ public interface Platform {
     interface LINUX_AMD64_BASE extends LINUX, AMD64 {
     }
 
-    interface LINUX_i386_BASE extends LINUX, i386 {
+    interface LINUX_I386_BASE extends LINUX, I386 {
     }
 
     /**
@@ -309,14 +309,14 @@ public interface Platform {
 
     }
 
-    class LINUX_i386 implements LINUX, LINUX_i386_BASE {
+    class LINUX_I386 implements LINUX, LINUX_I386_BASE {
 
         /**
          * Instantiates a marker instance of this platform.
          *
          * @since 19.0
          */
-        public LINUX_i386() {
+        public LINUX_I386() {
         }
 
     }
