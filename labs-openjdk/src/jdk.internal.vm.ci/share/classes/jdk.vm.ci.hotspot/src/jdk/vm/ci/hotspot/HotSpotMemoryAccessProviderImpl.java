@@ -131,7 +131,7 @@ class HotSpotMemoryAccessProviderImpl implements HotSpotMemoryAccessProvider {
     @Override
     public JavaConstant readNarrowOopConstant(Constant base, long displacement) {
         if (base instanceof HotSpotObjectConstantImpl) {
-            //assert runtime.getConfig().useCompressedOops;
+            assert runtime.getConfig().useCompressedOops;
             HotSpotObjectConstantImpl hsBase = (HotSpotObjectConstantImpl) base;
             JavaConstant res = runtime.getCompilerToVM().readFieldValue(hsBase, null, displacement, JavaKind.Object.getTypeChar());
             if (res != null) {

@@ -49,6 +49,7 @@ public class HotSpotSignature implements Signature {
             throw new IllegalArgumentException("Signature cannot be empty");
         }
         this.originalString = signature;
+	//System.out.println("Signature: " + signature);
 
         if (signature.charAt(0) == '(') {
             int cur = 1;

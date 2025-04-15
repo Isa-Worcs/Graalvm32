@@ -41,7 +41,6 @@ import jdk.vm.ci.meta.UnresolvedJavaField;
 import jdk.vm.ci.meta.UnresolvedJavaMethod;
 import jdk.vm.ci.meta.UnresolvedJavaType;
 
-
 /**
  * Implementation of {@link ConstantPool} for HotSpot.
  */
@@ -330,13 +329,7 @@ public final class HotSpotConstantPool implements ConstantPool, MetaspaceHandleO
      */
     long getEntryAt(int index) {
         assert checkBounds(index);
-        int ws = runtime().getHostJVMCIBackend().getTarget().wordSize;
         int offset = index * runtime().getHostJVMCIBackend().getTarget().wordSize;
-	System.out.println("target: " + runtime().getHostJVMCIBackend().getTarget());
-	System.out.print("wordSize=" + ws + " offset=" + offset + " at ");
-	StackTraceElement l = new Exception().getStackTrace()[0];
-	System.out.println(
-    		l.getClassName()+"/"+l.getMethodName()+":"+l.getLineNumber());
         return UNSAFE.getAddress(getConstantPoolPointer() + config().constantPoolSize + offset);
     }
 

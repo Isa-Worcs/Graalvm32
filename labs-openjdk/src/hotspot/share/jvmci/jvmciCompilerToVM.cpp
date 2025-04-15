@@ -1146,8 +1146,6 @@ C2V_VMENTRY_0(jboolean, hasCompiledCodeForOSR, (JNIEnv* env, jobject, ARGUMENT_P
 C2V_END
 
 C2V_VMENTRY_NULL(jobject, getSymbol, (JNIEnv* env, jobject, jlong symbol))
-  log_warning(mine)("the symbol: 0x%llx at %s %d" ,
-		  symbol, __FILE__, __LINE__);
   JVMCIObject sym = JVMCIENV->create_string((Symbol*)(address)symbol, JVMCI_CHECK_NULL);
   return JVMCIENV->get_jobject(sym);
 C2V_END
@@ -1991,7 +1989,7 @@ static jobject read_field_value(Handle obj, long displacement, jchar type_char, 
           // is_oop doesn't try to be completety safe but for most invalid values it provides a good
           // enough answer.  It possible to crash in the is_oop call but that just means the crash happens
           // closer to where things went wrong.
-          JVMCI_THROW_MSG_NULL(InternalError, err_msg("Read bad oop " INTPTR_FORMAT " at offset %ld in object " INTPTR_FORMAT " of type %s",
+          JVMCI_THROW_MSG_NULL(InternalError, err_msg("Read bad oop " INTPTR_FORMAT " at offset " JLONG_FORMAT " in object " INTPTR_FORMAT " of type %s",
                                                       p2i(value), displacement, p2i(obj()), obj->klass()->external_name()));
         }
 
