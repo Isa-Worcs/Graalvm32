@@ -222,12 +222,14 @@ public class GraalHotSpotVMConfig extends GraalHotSpotVMConfigAccess {
     public final boolean useDeferredInitBarriers = getFlag("ReduceInitialCardMarks", Boolean.class);
 
     // Compressed Oops related values.
-    public final boolean useCompressedOops = getFlag("UseCompressedOops", Boolean.class);
-    public final boolean useCompressedClassPointers = getFlag("UseCompressedClassPointers", Boolean.class);
+    //public final boolean useCompressedOops = getFlag("UseCompressedOops", Boolean.class);
+    public final boolean useCompressedOops = false;
+    //public final boolean useCompressedClassPointers = getFlag("UseCompressedClassPointers", Boolean.class);
+    public final boolean useCompressedClassPointers = false;
 
     public final long narrowOopBase = getFieldValue("CompilerToVM::Data::Universe_narrow_oop_base", Long.class, "address");
     public final int narrowOopShift = getFieldValue("CompilerToVM::Data::Universe_narrow_oop_shift", Integer.class, "int");
-    public final int objectAlignment = getFlag("ObjectAlignmentInBytes", Integer.class);
+    public final int objectAlignment = 8;
 
     public final int logMinObjAlignment() {
         return (int) (Math.log(objectAlignment) / Math.log(2));
@@ -422,12 +424,12 @@ public class GraalHotSpotVMConfig extends GraalHotSpotVMConfigAccess {
     }
 
     public int threadLastJavaFpOffset() {
-        assert osArch.equals("aarch64") || osArch.equals("amd64");
+        assert osArch.equals("aarch64") || osArch.equals("i386");
         return javaThreadAnchorOffset + getFieldOffset("JavaFrameAnchor::_last_Java_fp", Integer.class, "intptr_t*");
     }
 
-    public final int frameInterpreterFrameSenderSpOffset = getConstant("frame::interpreter_frame_sender_sp_offset", Integer.class, 0, osArch.equals("amd64"));
-    public final int frameInterpreterFrameLastSpOffset = getConstant("frame::interpreter_frame_last_sp_offset", Integer.class, 0, osArch.equals("amd64"));
+    public final int frameInterpreterFrameSenderSpOffset = getConstant("frame::interpreter_frame_sender_sp_offset", Integer.class, 0, osArch.equals("i386"));
+    public final int frameInterpreterFrameLastSpOffset = getConstant("frame::interpreter_frame_last_sp_offset", Integer.class, 0, osArch.equals("i386"));
 
     public final int osThreadInterruptedOffset = getFieldOffset("OSThread::_interrupted", Integer.class, "jint", Integer.MAX_VALUE, JDK < 14);
 
@@ -750,7 +752,8 @@ public class GraalHotSpotVMConfig extends GraalHotSpotVMConfigAccess {
     public final int VMINTRINSIC_COMPILED_LAMBDA_FORM = getConstant("vmIntrinsics::_compiledLambdaForm", Integer.class, -1, (JVMCI ? jvmciGE(JVMCI_20_2_b01) : JDK >= 16));
 
     public final boolean CPU_HAS_INTEL_JCC_ERRATUM = getFieldValue("VM_Version::_has_intel_jcc_erratum", Boolean.class, "bool",
-                    true, "amd64".equals(osArch) && (JVMCI ? jvmciGE(JVMCI_20_1_b01) : JDK >= 15));
+                    true, "i386".equals(osArch) && (JVMCI ? jvmciGE(JVMCI_20_1_b01) : JDK >= 15));
+//    public final boolean CPU_HAS_INTEL_JCC_ERRATUM = false;
 
     // Checkstyle: resume
 

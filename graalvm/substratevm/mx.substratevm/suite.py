@@ -103,6 +103,11 @@ suite = {
                         "urls": ["{urlbase}/llvm-shadowed-13.0.1-1.5.7_1-linux-x86_64.jar"],
                         "moduleName" : "com.oracle.svm.shadowed.org.bytedeco.llvm.linux.x86_64"
                     },
+                    "i386": {
+                        "sha1": "2ee54f786d4f4bb8f3e74106b33474203d9f09c1",
+                        "urls": ["{urlbase}/llvm-shadowed-13.0.1-1.5.7_1-linux-x86_64.jar"],
+                        "moduleName" : "com.oracle.svm.shadowed.org.bytedeco.llvm.linux.x86_64"
+                    },
                     "aarch64": {
                         "sha1": "0aac89ebd1682f03372e566f00a8cd97af2eb75a",
                         "urls": ["{urlbase}/llvm-shadowed-13.0.1-1.5.7_1-linux-arm64.jar"],
@@ -135,6 +140,11 @@ suite = {
             "os_arch": {
                 "linux": {
                     "amd64": {
+                        "sha1": "9b787a3e5422d06283f0138b937fd3054609cea0",
+                        "urls": ["{urlbase}/javacpp-shadowed-1.5.7_1-linux-x86_64.jar"],
+                        "moduleName" : "com.oracle.svm.shadowed.org.bytedeco.javacpp.linux.x86_64"
+                    },
+                    "i386": {
                         "sha1": "9b787a3e5422d06283f0138b937fd3054609cea0",
                         "urls": ["{urlbase}/javacpp-shadowed-1.5.7_1-linux-x86_64.jar"],
                         "moduleName" : "com.oracle.svm.shadowed.org.bytedeco.javacpp.linux.x86_64"
